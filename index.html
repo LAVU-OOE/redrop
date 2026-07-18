@@ -34,11 +34,12 @@
 
 <body translate="no">
     <header class="row-reverse">
-        #<a href="#" id="setAvatar" class="icon-button" title="Set Profile Picture">
-    <svg class="icon">
-        <use xlink:href="#camera" />
-    </svg>
-</a>
+        <!-- Camera icon for setting avatar -->
+        <a href="#" id="setAvatar" class="icon-button" title="Set Profile Picture">
+            <svg class="icon">
+                <use xlink:href="#camera" />
+            </svg>
+        </a>
         <a href="#about" class="icon-button" title="About Airdump">
             <svg class="icon">
                 <use xlink:href="#info-outline" />
@@ -55,20 +56,20 @@
             </svg>
         </a>
     </header>
+
     <!-- Peers -->
     <x-peers class="center"></x-peers>
-    <x-no-peers>
-        <h2>Ur the only Airdumper here</h2>
-    </x-no-peers>
+    <!-- The "no peers" text has been removed. -->
     <x-instructions desktop="Click to send files or right click to send a message." mobile="Tap to send files or long tap to send a message."></x-instructions>
+
     <!-- Footer -->
     <footer class="column">
         <svg class="icon logo">
             <use xlink:href="#wifi-tethering" />
         </svg>
         <div id="displayName">The easiest way to transfer data across devices.</div>
-        <!-- Removed: <div class="font-body2">Allow me to be discovered by: Everyone in this network.</div> -->
     </footer>
+
     <!-- Receive Dialog -->
     <x-dialog id="receiveDialog">
         <x-background class="full center">
@@ -83,6 +84,7 @@
             </x-paper>
         </x-background>
     </x-dialog>
+
     <!-- Send Text Dialog -->
     <x-dialog id="sendTextDialog">
         <form action="#">
@@ -98,6 +100,7 @@
             </x-background>
         </form>
     </x-dialog>
+
     <!-- Receive Text Dialog -->
     <x-dialog id="receiveTextDialog">
         <x-background class="full center">
@@ -111,10 +114,12 @@
             </x-paper>
         </x-background>
     </x-dialog>
+
     <!-- Toast -->
     <div class="toast-container full center">
         <x-toast class="row" shadow="1" id="toast">File Transfer Completed</x-toast>
     </div>
+
     <!-- About Page -->
     <x-about id="about" class="full center column">
         <section class="center column fade-in">
@@ -156,11 +161,9 @@
         <x-background></x-background>
     </x-about>
 
-    <!-- SVG Icon Library (unchanged) -->
+    <!-- SVG Icon Library -->
     <svg style="display: none;">
-        <symbol id="camera" viewBox="0 0 24 24">
-    <path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
-</symbol>
+        <!-- Existing icons -->
         <symbol id=wifi-tethering viewBox="0 0 24 24">
             <path d="M12 11c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 2c0-3.31-2.69-6-6-6s-6 2.69-6 6c0 2.22 1.21 4.15 3 5.19l1-1.74c-1.19-.7-2-1.97-2-3.45 0-2.21 1.79-4 4-4s4 1.79 4 4c0 1.48-.81 2.75-2 3.45l1 1.74c1.79-1.04 3-2.97 3-5.19zM12 3C6.48 3 2 7.48 2 13c0 3.7 2.01 6.92 4.99 8.65l1-1.73C5.61 18.53 4 15.96 4 13c0-4.42 3.58-8 8-8s8 3.58 8 8c0 2.96-1.61 5.53-4 6.92l1 1.73c2.99-1.73 5-4.95 5-8.65 0-5.52-4.48-10-10-10z"></path>
         </symbol>
@@ -200,6 +203,10 @@
             <path d="M0 0h24v24H0z" fill="none" />
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z" />
         </symbol>
+        <!-- Camera icon for avatar -->
+        <symbol id="camera" viewBox="0 0 24 24">
+            <path d="M9 2L7.17 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-3.17L15 2H9zm3 15c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/>
+        </symbol>
     </svg>
 
     <!-- Scripts -->
@@ -209,11 +216,13 @@
     </script>
     <script src="scripts/network.js"></script>
     <script src="scripts/ui.js"></script>
+
     <!-- Sounds -->
     <audio id="blop" autobuffer="true">
         <source src="sounds/blop.mp3" type="audio/mpeg">
         <source src="sounds/blop.ogg" type="audio/ogg">
     </audio>
+
     <noscript>
         <x-noscript class="full center column">
             <h1>Enable Javascript</h1>
