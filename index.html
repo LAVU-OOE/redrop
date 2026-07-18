@@ -1,602 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LAVU-Airdump</title>
-    <style>
-        /* ─── Reset & base ─── */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            background: #f5f7fa;
-            color: #1e293b;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1.5rem;
-        }
-
-        .app {
-            width: 100%;
-            max-width: 560px;
-        }
-
-        /* ─── Header ─── */
-        .header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.75rem;
-            padding: 0 0.25rem;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: #2563eb;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .logo-text {
-            font-weight: 700;
-            font-size: 1.25rem;
-            letter-spacing: -0.3px;
-        }
-
-        .logo-text span {
-            color: #2563eb;
-        }
-
-        .badge {
-            background: #eef2ff;
-            color: #2563eb;
-            font-size: 0.7rem;
-            font-weight: 600;
-            padding: 0.25rem 0.7rem;
-            border-radius: 20px;
-            letter-spacing: 0.3px;
-            text-transform: uppercase;
-        }
-
-        /* ─── Card ─── */
-        .card {
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 16px rgba(0, 0, 0, 0.04);
-            padding: 1.5rem 1.5rem 1.75rem;
-            margin-bottom: 1.25rem;
-            transition: box-shadow 0.2s;
-        }
-
-        .card-title {
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #64748b;
-            margin-bottom: 0.9rem;
-        }
-
-        .card-sub {
-            font-size: 0.9rem;
-            color: #475569;
-        }
-
-        /* ─── License plate row ─── */
-        .license-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .license-id {
-            font-family: 'SF Mono', 'Menlo', 'Monaco', 'Courier New', monospace;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #0f172a;
-            background: #f1f5f9;
-            padding: 0.25rem 0.9rem;
-            border-radius: 8px;
-            letter-spacing: 0.3px;
-        }
-
-        .license-hint {
-            font-size: 0.8rem;
-            color: #64748b;
-        }
-
-        /* ─── Peers list ─── */
-        .peers-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.65rem;
-        }
-
-        .peer-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #f8fafc;
-            padding: 0.75rem 1rem;
-            border-radius: 12px;
-            transition: background 0.15s;
-            border: 1px solid transparent;
-        }
-
-        .peer-item:hover {
-            background: #f1f5f9;
-            border-color: #e2e8f0;
-        }
-
-        .peer-info {
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
-        }
-
-        .peer-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: #dbeafe;
-            color: #2563eb;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 0.8rem;
-            flex-shrink: 0;
-        }
-
-        .peer-name {
-            font-weight: 500;
-            font-size: 0.95rem;
-            color: #0f172a;
-        }
-
-        .peer-status {
-            font-size: 0.7rem;
-            color: #22c55e;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        .peer-status .dot {
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: #22c55e;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.4rem;
-            font-family: inherit;
-            font-size: 0.8rem;
-            font-weight: 600;
-            padding: 0.45rem 1.1rem;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
-            background: #2563eb;
-            color: #fff;
-            box-shadow: 0 1px 2px rgba(37, 99, 235, 0.2);
-            white-space: nowrap;
-        }
-
-        .btn:hover {
-            background: #1d4ed8;
-            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
-        }
-
-        .btn:active {
-            transform: scale(0.97);
-        }
-
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            box-shadow: none;
-            transform: none;
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: #2563eb;
-            box-shadow: none;
-            border: 1px solid #dbeafe;
-        }
-
-        .btn-outline:hover {
-            background: #eff6ff;
-            box-shadow: none;
-        }
-
-        .empty-state {
-            color: #94a3b8;
-            font-size: 0.9rem;
-            padding: 0.4rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .empty-state svg {
-            flex-shrink: 0;
-        }
-
-        /* ─── Inline notice ─── */
-        .notice {
-            background: #f8fafc;
-            border-radius: 10px;
-            padding: 0.7rem 1rem;
-            font-size: 0.8rem;
-            color: #475569;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            border: 1px solid #e9edf2;
-        }
-
-        .notice svg {
-            flex-shrink: 0;
-            color: #94a3b8;
-        }
-
-        /* ─── hidden file input ─── */
-        #file-input {
-            display: none;
-        }
-
-        /* ─── Responsive ─── */
-        @media (max-width: 480px) {
-            .app {
-                padding: 0;
-            }
-            .card {
-                padding: 1.25rem;
-            }
-            .license-row {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            .peer-item {
-                flex-wrap: wrap;
-                gap: 0.5rem;
-            }
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-
-        /* ─── Utilities ─── */
-        .flex {
-            display: flex;
-            align-items: center;
-        }
-        .gap-1 {
-            gap: 0.5rem;
-        }
-        .gap-2 {
-            gap: 1rem;
-        }
-        .text-muted {
-            color: #64748b;
-        }
-        .text-sm {
-            font-size: 0.8rem;
-        }
-        .mt-1 {
-            margin-top: 0.5rem;
-        }
-        .w-full {
-            width: 100%;
-        }
-    </style>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <!-- Web App Config -->
+    <title>Airdump</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#3367d6">
+    <meta name="apple-mobile-web-app-capable" content="no">
+    <meta name="apple-mobile-web-app-title" content="Airdump">
+    <!-- Descriptions -->
+    <meta property="og:title" content="Airdump">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://your-domain.com/">
+    <meta property="og:author" content="https://facebook.com/RobinLinus">
+    <meta name="twitter:author" content="@RobinLinus">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:description" content="Instantly share images, videos, PDFs, and links with people nearby. Peer2Peer and Open Source. No Setup, No Signup.">
+    <meta name="og:description" content="Instantly share images, videos, PDFs, and links with people nearby. Peer2Peer and Open Source. No Setup, No Signup.">
+    <!-- Icons (keep as is) -->
+    <link rel="icon" sizes="96x96" href="images/favicon-96x96.png">
+    <link rel="shortcut icon" href="images/favicon-96x96.png">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <meta name="msapplication-TileImage" content="images/mstile-150x150.png">
+    <link rel="fluid-icon" type="image/png" href="images/android-chrome-192x192.png">
+    <meta name="twitter:image" content="https://your-domain.com/images/twitter-stream.jpg">
+    <meta property="og:image" content="https://your-domain.com/images/twitter-stream.jpg">
+    <!-- Resources -->
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="manifest" href="manifest.json">
 </head>
-<body>
 
-    <div class="app">
-
-        <!-- Header -->
-        <div class="header">
-            <div class="logo">
-                <div class="logo-icon">⛭</div>
-                <div class="logo-text">LAVU<span>·</span>Airdump</div>
-            </div>
-            <span class="badge">P2P</span>
-        </div>
-
-        <!-- Your ID card -->
-        <div class="card">
-            <div class="card-title">Your Station ID</div>
-            <div class="license-row">
-                <span class="license-id" id="my-id">Scanning…</span>
-                <span class="license-hint">Open this link on another device</span>
-            </div>
-        </div>
-
-        <!-- Peers card -->
-        <div class="card">
-            <div class="card-title">Active Dumpsters in Range</div>
-            <div id="peers-list" class="peers-list">
-                <div class="empty-state">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                    No other stations detected
+<body translate="no">
+    <header class="row-reverse">
+        <a href="#about" class="icon-button" title="About Airdump">
+            <svg class="icon">
+                <use xlink:href="#info-outline" />
+            </svg>
+        </a>
+        <a href="#" id="notification" class="icon-button" title="Enable Notifications" hidden>
+            <svg class="icon">
+                <use xlink:href="#notifications" />
+            </svg>
+        </a>
+        <a href="#" id="install" class="icon-button" title="Install Airdump" hidden>
+            <svg class="icon">
+                <use xlink:href="#homescreen" />
+            </svg>
+        </a>
+    </header>
+    <!-- Peers -->
+    <x-peers class="center"></x-peers>
+    <x-no-peers>
+        <h2>Open Airdump on other devices to send files.</h2>
+    </x-no-peers>
+    <x-instructions desktop="Click to send files or right click to send a message." mobile="Tap to send files or long tap to send a message."></x-instructions>
+    <!-- Footer -->
+    <footer class="column">
+        <svg class="icon logo">
+            <use xlink:href="#wifi-tethering" />
+        </svg>
+        <div id="displayName">The easiest way to transfer data across devices.</div>
+        <div class="font-body2">Allow me to be discovered by: Everyone in this network.</div>
+    </footer>
+    <!-- Receive Dialog -->
+    <x-dialog id="receiveDialog">
+        <x-background class="full center">
+            <x-paper shadow="2">
+                <h3>File Received</h3>
+                <div class="font-subheading" id="fileName">Filename</div>
+                <div class="font-body2" id="fileSize"></div>
+                <div class="row-reverse">
+                    <a class="button" close id="download" title="Download File" autofocus>Download</a>
+                    <button class="button" close>Ignore</button>
                 </div>
-            </div>
-        </div>
-
-        <!-- Notice -->
-        <div class="notice">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg>
-            <span>Direct peer-to-peer transfer · No server storage</span>
-        </div>
-
-        <!-- Hidden file input -->
-        <input type="file" id="file-input" />
-
+            </x-paper>
+        </x-background>
+    </x-dialog>
+    <!-- Send Text Dialog -->
+    <x-dialog id="sendTextDialog">
+        <form action="#">
+            <x-background class="full center">
+                <x-paper shadow="2">
+                    <h3>Send a Message</h3>
+                    <input id="textInput" placeholder="Send a message" autocomplete="off" autofocus>
+                    <div class="row-reverse">
+                        <button class="button" type="submit" close>Send</button>
+                        <a class="button" close>Cancel</a>
+                    </div>
+                </x-paper>
+            </x-background>
+        </form>
+    </x-dialog>
+    <!-- Receive Text Dialog -->
+    <x-dialog id="receiveTextDialog">
+        <x-background class="full center">
+            <x-paper shadow="2">
+                <h3>Message Received</h3>
+                <div class="font-subheading" id="text"></div>
+                <div class="row-reverse">
+                    <button class="button" id="copy" close autofocus>Copy</button>
+                    <button class="button" close>Close</button>
+                </div>
+            </x-paper>
+        </x-background>
+    </x-dialog>
+    <!-- Toast -->
+    <div class="toast-container full center">
+        <x-toast class="row" shadow="1" id="toast">File Transfer Completed</x-toast>
     </div>
-
+    <!-- About Page -->
+    <x-about id="about" class="full center column">
+        <section class="center column fade-in">
+            <header class="row-reverse">
+                <a href="#" class="close icon-button">
+                    <svg class="icon">
+                        <use xlink:href="#close" />
+                    </svg>
+                </a>
+            </header>
+            <svg class="icon logo">
+                <use xlink:href="#wifi-tethering" />
+            </svg>
+            <h1>Airdump</h1>
+            <div class="font-subheading">The easiest way to transfer files across devices.</div>
+            <div class="row">
+                <a class="icon-button" target="_blank" href="https://github.com/RobinLinus/snapdrop" title="Airdump on Github" rel="noreferrer">
+                    <svg class="icon">
+                        <use xlink:href="#github" />
+                    </svg>
+                </a>
+                <a class="icon-button" target="_blank" href="https://github.com/RobinLinus/snapdrop#support-the-snapdrop-community" title="Contribute to keep Airdump free" rel="noreferrer">
+                    <svg class="icon">
+                        <use xlink:href="#monetarization" />
+                    </svg>
+                </a>
+                <a class="icon-button" target="_blank" href="https://twitter.com/intent/tweet?text=https://your-domain.com%20by%20@robin_linus%20&" title="Tweet about Airdump" rel="noreferrer">
+                    <svg class="icon">
+                        <use xlink:href="#twitter" />
+                    </svg>
+                </a>
+                <a class="icon-button" target="_blank" href="https://github.com/RobinLinus/snapdrop#frequently-asked-questions" title="Frequently asked questions" rel="noreferrer">
+                    <svg class="icon">
+                        <use xlink:href="#help-outline" />
+                    </svg>
+                </a>
+            </div>
+        </section>
+        <x-background></x-background>
+    </x-about>
+    <!-- SVG Icon Library (unchanged) -->
+    <!-- ... keep all symbols ... -->
+    <!-- Scripts -->
     <script>
-        // ─── Signaling ──────────────────────────────────────────────────────────
-        const SIGNALING_SERVER = 'wss://pairdrop.net/ws';
-        let ws;
-        let myId = 'ASZ-' + Math.random().toString(36).substring(2, 7).toUpperCase();
-        let rtcConnections = {};
-        let targetPeerId = null;
-
-        const rtcConfig = {
-            iceServers: [{ urls: 'stun:stun.l.google.com:19302' }]
-        };
-
-        // ─── DOM refs ──────────────────────────────────────────────────────────
-        const myIdEl = document.getElementById('my-id');
-        const peersListEl = document.getElementById('peers-list');
-        const fileInput = document.getElementById('file-input');
-
-        // ─── Init ──────────────────────────────────────────────────────────────
-        function init() {
-            myIdEl.textContent = myId;
-            connectSignaling();
-            fileInput.addEventListener('change', handleFileSelect);
-        }
-
-        // ─── Signaling ──────────────────────────────────────────────────────────
-        function connectSignaling() {
-            ws = new WebSocket(SIGNALING_SERVER);
-
-            ws.onopen = () => {
-                console.log('[LAVU] Signaling connected');
-                ws.send(JSON.stringify({ type: 'join', id: myId }));
-            };
-
-            ws.onmessage = async (event) => {
-                try {
-                    const msg = JSON.parse(event.data);
-                    switch (msg.type) {
-                        case 'peers-list':
-                            updatePeersList(msg.peers.filter(id => id !== myId));
-                            break;
-                        case 'signal':
-                            handleSignal(msg.from, msg.signal);
-                            break;
-                    }
-                } catch (_) { /* ignore */ }
-            };
-
-            ws.onclose = () => {
-                console.log('[LAVU] Signaling dropped, reconnecting…');
-                setTimeout(connectSignaling, 3000);
-            };
-        }
-
-        // ─── Peers list ────────────────────────────────────────────────────────
-        function updatePeersList(peerIds) {
-            if (peerIds.length === 0) {
-                peersListEl.innerHTML = `
-                    <div class="empty-state">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-                        No other stations detected
-                    </div>
-                `;
-                return;
-            }
-
-            peersListEl.innerHTML = '';
-            peerIds.forEach(id => {
-                const div = document.createElement('div');
-                div.className = 'peer-item';
-
-                const initial = id.charAt(0).toUpperCase() || '?';
-
-                div.innerHTML = `
-                    <div class="peer-info">
-                        <div class="peer-avatar">${initial}</div>
-                        <span class="peer-name">${id}</span>
-                        <span class="peer-status"><span class="dot"></span> online</span>
-                    </div>
-                    <button class="btn" data-peer="${id}">Send</button>
-                `;
-                peersListEl.appendChild(div);
-
-                const btn = div.querySelector('button');
-                btn.addEventListener('click', () => {
-                    targetPeerId = id;
-                    fileInput.click();
-                });
-            });
-        }
-
-        // ─── File selection ────────────────────────────────────────────────────
-        async function handleFileSelect(e) {
-            const file = e.target.files[0];
-            if (!file || !targetPeerId) {
-                // reset so the same file can be re-selected
-                fileInput.value = '';
-                return;
-            }
-
-            console.log(`[LAVU] Sending: ${file.name} (${file.size} bytes) to ${targetPeerId}`);
-
-            const pc = createPeerConnection(targetPeerId);
-            const channel = pc.createDataChannel('file-transfer');
-            setupOutboundChannel(channel, file);
-
-            const offer = await pc.createOffer();
-            await pc.setLocalDescription(offer);
-
-            ws.send(JSON.stringify({
-                type: 'signal',
-                to: targetPeerId,
-                from: myId,
-                signal: { sdp: pc.localDescription }
-            }));
-
-            // reset so the same file can be re-selected
-            fileInput.value = '';
-        }
-
-        // ─── PeerConnection factory ───────────────────────────────────────────
-        function createPeerConnection(peerId) {
-            if (rtcConnections[peerId]) return rtcConnections[peerId];
-
-            const pc = new RTCPeerConnection(rtcConfig);
-            rtcConnections[peerId] = pc;
-
-            pc.onicecandidate = (event) => {
-                if (event.candidate) {
-                    ws.send(JSON.stringify({
-                        type: 'signal',
-                        to: peerId,
-                        from: myId,
-                        signal: { candidate: event.candidate }
-                    }));
-                }
-            };
-
-            pc.ondatachannel = (event) => {
-                setupInboundChannel(event.channel);
-            };
-
-            return pc;
-        }
-
-        // ─── Signal handling ──────────────────────────────────────────────────
-        async function handleSignal(fromPeerId, signal) {
-            const pc = createPeerConnection(fromPeerId);
-
-            if (signal.sdp) {
-                await pc.setRemoteDescription(new RTCSessionDescription(signal.sdp));
-                if (signal.sdp.type === 'offer') {
-                    const answer = await pc.createAnswer();
-                    await pc.setLocalDescription(answer);
-                    ws.send(JSON.stringify({
-                        type: 'signal',
-                        to: fromPeerId,
-                        from: myId,
-                        signal: { sdp: pc.localDescription }
-                    }));
-                }
-            } else if (signal.candidate) {
-                try {
-                    await pc.addIceCandidate(new RTCIceCandidate(signal.candidate));
-                } catch (_) { /* ignore */ }
-            }
-        }
-
-        // ─── Outbound data channel ────────────────────────────────────────────
-        function setupOutboundChannel(channel, file) {
-            channel.onopen = () => {
-                console.log('[LAVU] Data channel open, sending file');
-
-                channel.send(JSON.stringify({ name: file.name, size: file.size, type: file.type }));
-
-                const chunkSize = 16384;
-                const reader = new FileReader();
-                let offset = 0;
-
-                reader.onload = (ev) => {
-                    channel.send(ev.target.result);
-                    offset += ev.target.result.byteLength;
-                    if (offset < file.size) {
-                        readNext();
-                    } else {
-                        console.log('[LAVU] Transfer complete');
-                    }
-                };
-
-                const readNext = () => {
-                    const slice = file.slice(offset, offset + chunkSize);
-                    reader.readAsArrayBuffer(slice);
-                };
-
-                readNext();
-            };
-        }
-
-        // ─── Inbound data channel ─────────────────────────────────────────────
-        function setupInboundChannel(channel) {
-            let fileInfo = null;
-            let buffers = [];
-            let received = 0;
-
-            channel.onmessage = (event) => {
-                if (typeof event.data === 'string') {
-                    fileInfo = JSON.parse(event.data);
-                    console.log(`[LAVU] Receiving: ${fileInfo.name}`);
-                    return;
-                }
-
-                buffers.push(event.data);
-                received += event.data.byteLength;
-
-                if (fileInfo && received === fileInfo.size) {
-                    console.log('[LAVU] Download complete');
-                    const blob = new Blob(buffers, { type: fileInfo.type });
-                    const url = URL.createObjectURL(blob);
-                    const a = document.createElement('a');
-                    a.href = url;
-                    a.download = fileInfo.name;
-                    a.click();
-                    URL.revokeObjectURL(url);
-                    buffers = [];
-                    fileInfo = null;
-                    received = 0;
-                }
-            };
-        }
-
-        // ─── Go ──────────────────────────────────────────────────────────────────
-        window.onload = init;
+        // Replace with your actual Cloudflare Worker URL
+        window.WEBSOCKET_URL = 'wss://snapdrop-worker.your-subdomain.workers.dev';
     </script>
-
+    <script src="scripts/network.js"></script>
+    <script src="scripts/ui.js"></script>
+    <!-- Sounds -->
+    <audio id="blop" autobuffer="true">
+        <source src="/sounds/blop.mp3" type="audio/mpeg">
+        <source src="/sounds/blop.ogg" type="audio/ogg">
+    </audio>
+    <noscript>
+        <x-noscript class="full center column">
+            <h1>Enable Javascript</h1>
+            <h3>Airdump works only with Javascript.</h3>
+        </x-noscript>
+        <style>
+        x-noscript {
+            background: #599cfc;
+            color: white;
+            z-index: 2;
+        }
+        a[href="#info"] {
+            color: white;
+        }
+        </style>
+    </noscript>
 </body>
 </html>
