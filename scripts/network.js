@@ -8,6 +8,13 @@ class ServerConnection {
         Events.on('beforeunload', e => this._disconnect());
         Events.on('pagehide', e => this._disconnect());
         document.addEventListener('visibilitychange', e => this._onVisibilityChange());
+
+        // 👇 Listen for avatar updates from the UI
+        Events.on('send-avatar', avatar => {
+            if (this._isConnected()) {
+                this.send({ type: 'avatar', avatar });
+            }
+        });
     }
 
     _connect() {
@@ -15,7 +22,10 @@ class ServerConnection {
         if (this._isConnected() || this._isConnecting()) return;
         const ws = new WebSocket(this._endpoint());
         ws.binaryType = 'arraybuffer';
-        ws.onopen = e => console.log('WS: server connected');
+        ws.onopen = e => {
+            console.log('WS: server connected');
+            Events.fire('ws-open'); // 👈 Fire event when connection opens
+        };
         ws.onmessage = e => this._onMessage(e.data);
         ws.onclose = e => this._onDisconnect();
         ws.onerror = e => console.error(e);
@@ -44,8 +54,11 @@ class ServerConnection {
             case 'displayName':
                 Events.fire('displayName', msg);
                 break;
+            case 'peer-avatar':          // 👈 Handle avatar updates from server
+                Events.fire('peer-avatar', { peerId: msg.peerId, avatar: msg.avatar });
+                break;
             default:
-                console.error('WS: unkown message type', msg);
+                console.error('WS: unknown message type', msg);
         }
     }
 
@@ -54,15 +67,15 @@ class ServerConnection {
         this._socket.send(JSON.stringify(message));
     }
 
-_endpoint() {
-    if (window.WEBSOCKET_URL) {
-        const suffix = window.isRtcSupported ? '/webrtc' : '/fallback';
-        return window.WEBSOCKET_URL + suffix;
+    _endpoint() {
+        if (window.WEBSOCKET_URL) {
+            const suffix = window.isRtcSupported ? '/webrtc' : '/fallback';
+            return window.WEBSOCKET_URL + suffix;
+        }
+        const protocol = location.protocol.startsWith('https') ? 'wss' : 'ws';
+        const webrtc = window.isRtcSupported ? '/webrtc' : '/fallback';
+        return protocol + '://' + location.host + '/server' + webrtc;
     }
-    const protocol = location.protocol.startsWith('https') ? 'wss' : 'ws';
-    const webrtc = window.isRtcSupported ? '/webrtc' : '/fallback';
-    return protocol + '://' + location.host + '/server' + webrtc;
-}
 
     _disconnect() {
         this.send({ type: 'disconnect' });
@@ -91,8 +104,8 @@ _endpoint() {
     }
 }
 
+// ========== Peer classes (unchanged) ==========
 class Peer {
-
     constructor(serverConnection, peerId) {
         this._server = serverConnection;
         this._peerId = peerId;
@@ -192,7 +205,6 @@ class Peer {
         const progress = this._digester.progress;
         this._onDownloadProgress(progress);
 
-        // occasionally notify sender about our progress 
         if (progress - this._lastProgress < 0.01) return;
         this._lastProgress = progress;
         this._sendProgress(progress);
@@ -227,10 +239,9 @@ class Peer {
 }
 
 class RTCPeer extends Peer {
-
     constructor(serverConnection, peerId) {
         super(serverConnection, peerId);
-        if (!peerId) return; // we will listen for a caller
+        if (!peerId) return;
         this._connect(peerId, true);
     }
 
@@ -261,7 +272,6 @@ class RTCPeer extends Peer {
     }
 
     _onDescription(description) {
-        // description.sdp = description.sdp.replace('b=AS:30', 'b=AS:1638400');
         this._conn.setLocalDescription(description)
             .then(_ => this._sendSignal({ sdp: description }))
             .catch(e => this._onError(e));
@@ -277,7 +287,7 @@ class RTCPeer extends Peer {
 
         if (message.sdp) {
             this._conn.setRemoteDescription(new RTCSessionDescription(message.sdp))
-                .then( _ => {
+                .then(_ => {
                     if (message.sdp.type === 'offer') {
                         return this._conn.createAnswer()
                             .then(d => this._onDescription(d));
@@ -300,7 +310,7 @@ class RTCPeer extends Peer {
     _onChannelClosed() {
         console.log('RTC: channel closed', this._peerId);
         if (!this.isCaller) return;
-        this._connect(this._peerId, true); // reopen the channel
+        this._connect(this._peerId, true);
     }
 
     _onConnectionStateChange(e) {
@@ -342,7 +352,6 @@ class RTCPeer extends Peer {
     }
 
     refresh() {
-        // check if channel is open. otherwise create one
         if (this._isConnected() || this._isConnecting()) return;
         this._connect(this._peerId, this._isCaller);
     }
@@ -357,7 +366,6 @@ class RTCPeer extends Peer {
 }
 
 class PeersManager {
-
     constructor(serverConnection) {
         this.peers = {};
         this._server = serverConnection;
@@ -386,7 +394,7 @@ class PeersManager {
             } else {
                 this.peers[peer.id] = new WSPeer(this._server, peer.id);
             }
-        })
+        });
     }
 
     sendTo(peerId, message) {
@@ -407,7 +415,6 @@ class PeersManager {
         if (!peer || !peer._peer) return;
         peer._peer.close();
     }
-
 }
 
 class WSPeer {
@@ -418,10 +425,9 @@ class WSPeer {
 }
 
 class FileChunker {
-
     constructor(file, onChunk, onPartitionEnd) {
-        this._chunkSize = 64000; // 64 KB
-        this._maxPartitionSize = 1e6; // 1 MB
+        this._chunkSize = 64000;
+        this._maxPartitionSize = 1e6;
         this._offset = 0;
         this._partitionSize = 0;
         this._file = file;
@@ -471,7 +477,6 @@ class FileChunker {
 }
 
 class FileDigester {
-
     constructor(meta, callback) {
         this._buffer = [];
         this._bytesReceived = 0;
@@ -484,10 +489,8 @@ class FileDigester {
     unchunk(chunk) {
         this._buffer.push(chunk);
         this._bytesReceived += chunk.byteLength || chunk.size;
-        const totalChunks = this._buffer.length;
         this.progress = this._bytesReceived / this._size;
         if (this._bytesReceived < this._size) return;
-        // we are done
         let blob = new Blob(this._buffer, { type: this._mime });
         this._callback({
             name: this._name,
@@ -496,7 +499,6 @@ class FileDigester {
             blob: blob
         });
     }
-
 }
 
 class Events {
@@ -509,9 +511,8 @@ class Events {
     }
 }
 
-
 RTCPeer.config = {
     'iceServers': [{
         urls: 'stun:stun.l.google.com:19302'
     }]
-}
+};
