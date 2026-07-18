@@ -11,9 +11,9 @@
     <meta name="apple-mobile-web-app-title" content="Airdump">
     <meta property="og:title" content="Airdump">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://lavu-ooe.github.io/">
-    <meta property="og:author" content="https://facebook.com/7Pub">
-    <meta name="twitter:author" content="@7Pub">
+    <meta property="og:url" content="https://your-domain.com/">
+    <meta property="og:author" content="https://facebook.com/RobinLinus">
+    <meta name="twitter:author" content="@RobinLinus">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:description" content="Instantly share images, videos, PDFs, and links with people nearby. Peer2Peer and Open Source. No Setup, No Signup.">
     <meta name="og:description" content="Instantly share images, videos, PDFs, and links with people nearby. Peer2Peer and Open Source. No Setup, No Signup.">
@@ -22,8 +22,8 @@
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
     <meta name="msapplication-TileImage" content="images/mstile-150x150.png">
     <link rel="fluid-icon" type="image/png" href="images/android-chrome-192x192.png">
-    <meta name="twitter:image" content="https://lavu-ooe.github.io/images/twitter-stream.jpg">
-    <meta property="og:image" content="https://lavu-ooe.github.io/images/twitter-stream.jpg">
+    <meta name="twitter:image" content="https://your-domain.com/images/twitter-stream.jpg">
+    <meta property="og:image" content="https://your-domain.com/images/twitter-stream.jpg">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link rel="manifest" href="manifest.json">
 </head>
@@ -129,16 +129,16 @@
             <h1 data-i18n-key="about.title" data-i18n-attrs="text">Airdump</h1>
             <div class="font-subheading" data-i18n-key="about.subtitle" data-i18n-attrs="text">The easiest way to transfer files across devices.</div>
             <div class="row">
-                <a class="icon-button" target="_blank" href="https://github.com/7Pub/snapdrop" data-i18n-key="about.github" data-i18n-attrs="title" title="Airdump on Github" rel="noreferrer">
+                <a class="icon-button" target="_blank" href="https://github.com/RobinLinus/snapdrop" data-i18n-key="about.github" data-i18n-attrs="title" title="Airdump on Github" rel="noreferrer">
                     <svg class="icon"><use xlink:href="#github" /></svg>
                 </a>
-                <a class="icon-button" target="_blank" href="https://github.com/7Pub/snapdrop#support-the-snapdrop-community" data-i18n-key="about.donate" data-i18n-attrs="title" title="Contribute to keep Airdump free" rel="noreferrer">
+                <a class="icon-button" target="_blank" href="https://github.com/RobinLinus/snapdrop#support-the-snapdrop-community" data-i18n-key="about.donate" data-i18n-attrs="title" title="Contribute to keep Airdump free" rel="noreferrer">
                     <svg class="icon"><use xlink:href="#donation" /></svg>
                 </a>
-                <a class="icon-button" target="_blank" href="https://twitter.com/intent/tweet?text=https://lavu-ooe.github.io%20by%20@robin_linus%20&" data-i18n-key="about.tweet" data-i18n-attrs="title" title="Tweet about Airdump" rel="noreferrer">
+                <a class="icon-button" target="_blank" href="https://twitter.com/intent/tweet?text=https://your-domain.com%20by%20@robin_linus%20&" data-i18n-key="about.tweet" data-i18n-attrs="title" title="Tweet about Airdump" rel="noreferrer">
                     <svg class="icon"><use xlink:href="#x-twitter" /></svg>
                 </a>
-                <a class="icon-button" target="_blank" href="https://github.com/7Pub/snapdrop#frequently-asked-questions" data-i18n-key="about.faq" data-i18n-attrs="title" title="Frequently asked questions" rel="noreferrer">
+                <a class="icon-button" target="_blank" href="https://github.com/RobinLinus/snapdrop#frequently-asked-questions" data-i18n-key="about.faq" data-i18n-attrs="title" title="Frequently asked questions" rel="noreferrer">
                     <svg class="icon"><use xlink:href="#help-outline" /></svg>
                 </a>
             </div>
@@ -146,73 +146,137 @@
         <x-background></x-background>
     </x-about>
 
-    <!-- SVG Icon Library (full – include all your symbols) -->
+    <!-- SVG Icon Library (minimal set – add your own if needed) -->
     <svg style="display: none;">
-        <!-- ... paste your complete SVG library here ... -->
+        <symbol id="wifi-tethering" viewBox="0 0 24 24">
+            <path d="M12 11c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 2c0-3.31-2.69-6-6-6s-6 2.69-6 6c0 2.22 1.21 4.15 3 5.19l1-1.74c-1.19-.7-2-1.97-2-3.45 0-2.21 1.79-4 4-4s4 1.79 4 4c0 1.48-.81 2.75-2 3.45l1 1.74c1.79-1.04 3-2.97 3-5.19zM12 3C6.48 3 2 7.48 2 13c0 3.7 2.01 6.92 4.99 8.65l1-1.73C5.61 18.53 4 15.96 4 13c0-4.42 3.58-8 8-8s8 3.58 8 8c0 2.96-1.61 5.53-4 6.92l1 1.73c2.99-1.73 5-4.95 5-8.65 0-5.52-4.48-10-10-10z"></path>
+        </symbol>
+        <symbol id="desktop-mac" viewBox="0 0 24 24">
+            <path d="M21 2H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h7l-2 3v1h8v-1l-2-3h7c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H3V4h18v10z"></path>
+        </symbol>
+        <symbol id="phone-iphone" viewBox="0 0 24 24">
+            <path d="M15.5 1h-8C6.12 1 5 2.12 5 3.5v17C5 21.88 6.12 23 7.5 23h8c1.38 0 2.5-1.12 2.5-2.5v-17C18 2.12 16.88 1 15.5 1zm-4 21c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5-4H7V4h9v14z"></path>
+        </symbol>
+        <symbol id="tablet-mac" viewBox="0 0 24 24">
+            <path d="M18.5 0h-14C3.12 0 2 1.12 2 2.5v19C2 22.88 3.12 24 4.5 24h14c1.38 0 2.5-1.12 2.5-2.5v-19C21 1.12 19.88 0 18.5 0zm-7 23c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm7.5-4H4V3h15v16z"></path>
+        </symbol>
+        <symbol id="info-outline" viewBox="0 0 24 24">
+            <path d="M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z"></path>
+        </symbol>
+        <symbol id="close-icon" viewBox="0 0 24 24">
+            <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+        </symbol>
+        <symbol id="help-outline" viewBox="0 0 24 24">
+            <path d="M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-2.21 0-4 1.79-4 4h2c0-1.1.9-2 2-2s2 .9 2 2c0 2-3 1.75-3 5h2c0-2.25 3-2.5 3-5 0-2.21-1.79-4-4-4z"></path>
+        </symbol>
+        <symbol id="x-twitter">
+            <path d="M17.996,2.219l3.265,0l-7.13,8.148l8.388,11.088l-6.566,0l-5.147,-6.723l-5.882,6.723l-3.269,0l7.625,-8.716l-8.041,-10.52l6.733,0l4.647,6.146l5.377,-6.146Zm-1.146,17.285l1.808,-0l-11.671,-15.435l-1.942,0l11.805,15.435Z"></path>
+        </symbol>
+        <symbol id="github">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path>
+        </symbol>
+        <symbol id="notifications">
+            <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"></path>
+        </symbol>
+        <symbol id="homescreen">
+            <path fill="none" d="M0 0h24v24H0V0z"></path>
+            <path d="M18 1.01L8 1c-1.1 0-2 .9-2 2v3h2V5h10v14H8v-1H6v3c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM10 15h2V8H5v2h3.59L3 15.59 4.41 17 10 11.41z"></path>
+            <path fill="none" d="M0 0h24v24H0V0z"></path>
+        </symbol>
+        <symbol id="donation">
+            <path d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"></path>
+        </symbol>
         <symbol id="icon-language-selector" viewBox="0 0 640 512">
             <path d="M0 128C0 92.7 28.7 64 64 64H256h48 16H576c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H320 304 256 64c-35.3 0-64-28.7-64-64V128zm320 0V384H576V128H320zM178.3 175.9c-3.2-7.2-10.4-11.9-18.3-11.9s-15.1 4.7-18.3 11.9l-64 144c-4.5 10.1 .1 21.9 10.2 26.4s21.9-.1 26.4-10.2l8.9-20.1h73.6l8.9 20.1c4.5 10.1 16.3 14.6 26.4 10.2s14.6-16.3 10.2-26.4l-64-144zM160 233.2L179 276H141l19-42.8zM448 164c11 0 20 9 20 20v4h44 16c11 0 20 9 20 20s-9 20-20 20h-2l-1.6 4.5c-8.9 24.4-22.4 46.6-39.6 65.4c.9 .6 1.8 1.1 2.7 1.6l18.9 11.3c9.5 5.7 12.5 18 6.9 27.4s-18 12.5-27.4 6.9l-18.9-11.3c-4.5-2.7-8.8-5.5-13.1-8.5c-10.6 7.5-21.9 14-34 19.4l-3.6 1.6c-10.1 4.5-21.9-.1-26.4-10.2s.1-21.9 10.2-26.4l3.6-1.6c6.4-2.9 12.6-6.1 18.5-9.8l-12.2-12.2c-7.8-7.8-7.8-20.5 0-28.3s20.5-7.8 28.3 0l14.6 14.6 .5 .5c12.4-13.1 22.5-28.3 29.8-45H448 376c-11 0-20-9-20-20s9-20 20-20h52v-4c0-11 9-20 20-20z"></path>
         </symbol>
-        <!-- include all other symbols (desktop-mac, phone-iphone, etc.) -->
+        <!-- Add any other icons you need from your full library here -->
     </svg>
 
-    <!-- Scripts -->
-<!-- Scripts -->
-<script>
-    window.WEBSOCKET_URL = 'wss://airdump-api.lavu-ooe.workers.dev';
-</script>
+    <!-- Scripts: load in correct order -->
+    <script>
+        // Set WebSocket URL before loading network.js
+        window.WEBSOCKET_URL = 'wss://airdump-api.lavu-ooe.workers.dev';
+    </script>
 
-<!-- Load dependencies in order -->
-<script src="scripts/network.js"></script>
-<script src="scripts/ui.js"></script>
-<script src="scripts/localization.js"></script>
+    <!-- 1. network.js – defines Events and all networking classes -->
+    <script src="scripts/network.js"></script>
 
-<!-- Initialize localization with error handling -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Ensure Localization class is loaded
-        if (typeof Localization === 'undefined') {
-            console.warn('Localization not loaded – using default language.');
-            return;
-        }
-        try {
-            Localization.setInitialTranslation()
-                .then(() => console.log('Localization ready'))
-                .catch(err => console.warn('Localization init error:', err));
-        } catch (e) {
-            console.warn('Localization init error:', e);
-        }
-    });
+    <!-- 2. ui.js – uses Events -->
+    <script src="scripts/ui.js"></script>
 
-    // Language selector toggle
-    document.addEventListener('DOMContentLoaded', function() {
-        const selector = document.getElementById('languageSelector');
-        const dropdown = document.getElementById('languageDropdown');
-        if (selector && dropdown) {
-            selector.addEventListener('click', function(e) {
-                e.preventDefault();
-                dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
-            });
-            dropdown.querySelectorAll('a').forEach(function(link) {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const lang = this.getAttribute('data-lang');
-                    localStorage.setItem('language_code', lang);
-                    if (typeof Localization !== 'undefined') {
-                        Localization.setTranslation(lang).then(function() {
-                            dropdown.style.display = 'none';
+    <!-- 3. localization.js – defines Localization (does not depend on Events) -->
+    <script src="scripts/localization.js"></script>
+
+    <!-- 4. Initialize everything after all scripts have loaded -->
+    <script>
+        (function() {
+            // Wait for DOM and all scripts (including async) to be ready
+            function init() {
+                // Check if Events is defined (network.js loaded)
+                if (typeof Events === 'undefined') {
+                    console.warn('Airdump: network.js not loaded – retrying in 1s');
+                    setTimeout(init, 1000);
+                    return;
+                }
+
+                // Check if Localization is defined
+                if (typeof Localization === 'undefined') {
+                    console.warn('Airdump: localization.js not loaded – using fallback');
+                    // Fallback: just use English
+                    return;
+                }
+
+                // Initialize localization
+                try {
+                    Localization.setInitialTranslation()
+                        .then(function() {
+                            console.log('Airdump: localization ready');
+                        })
+                        .catch(function(err) {
+                            console.warn('Airdump: localization init error', err);
                         });
-                    } else {
-                        // Reload page to apply language (fallback)
-                        location.reload();
-                    }
-                });
-            });
-        }
-    });
-</script>
+                } catch (e) {
+                    console.warn('Airdump: localization init exception', e);
+                }
+
+                // Language selector toggle
+                const selector = document.getElementById('languageSelector');
+                const dropdown = document.getElementById('languageDropdown');
+                if (selector && dropdown) {
+                    selector.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+                    });
+                    dropdown.querySelectorAll('a').forEach(function(link) {
+                        link.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            const lang = this.getAttribute('data-lang');
+                            localStorage.setItem('language_code', lang);
+                            if (typeof Localization !== 'undefined') {
+                                Localization.setTranslation(lang).then(function() {
+                                    dropdown.style.display = 'none';
+                                });
+                            } else {
+                                // fallback: reload page
+                                location.reload();
+                            }
+                        });
+                    });
+                }
+            }
+
+            // Start when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+        })();
+    </script>
 
     <style>
-        /* Simple dropdown styling */
+        /* Dropdown styling */
         #languageDropdown {
             position: absolute;
             top: 56px;
@@ -222,6 +286,7 @@
             border-radius: 4px;
             padding: 8px 0;
             z-index: 100;
+            min-width: 120px;
         }
         #languageDropdown a {
             display: block;
