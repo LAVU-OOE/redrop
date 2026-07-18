@@ -1,6 +1,8 @@
 {
     "name": "Airdump",
     "short_name": "Airdump",
+    "scope": "/",
+    "orientation": "any",
     "icons": [
         { "src": "images/favicon-96x96.png", "sizes": "96x96", "type": "image/png" },
         { "src": "images/apple-touch-icon.png", "sizes": "152x152", "type": "image/png" },

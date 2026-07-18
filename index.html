@@ -214,20 +214,19 @@
                     return;
                 }
 
-                // Check Localization
+                // Check Localization – it auto‑inits when loaded
                 if (typeof Localization === 'undefined') {
                     console.warn('Airdump: localization.js not loaded – using fallback');
                     // Continue without translation
                 } else {
                     try {
-                        // Localization.setInitialTranslation is now static
-if (typeof Localization !== 'undefined' && typeof Localization.setInitialTranslation === 'function') {
-    Localization.setInitialTranslation()
-        .then(() => console.log('Airdump: localization ready'))
-        .catch(err => console.warn('Airdump: localization error', err));
-} else {
-    console.warn('Airdump: Localization not available – using English fallback');
-}
+                        // Localization.init() already called, so now set translations
+                        Localization.setInitialTranslation()
+                            .then(() => console.log('Airdump: localization ready'))
+                            .catch(err => console.warn('Airdump: localization error', err));
+                    } catch (e) {
+                        console.warn('Airdump: localization exception', e);
+                    }
                 }
 
                 // Language dropdown toggle

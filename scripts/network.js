@@ -16,7 +16,6 @@ class ServerConnection {
         ws.binaryType = 'arraybuffer';
         ws.onopen = e => {
             console.log('WS: server connected');
-            // Fire custom event so others know we're connected
             Events.fire('ws-open');
         };
         ws.onmessage = e => this._onMessage(e.data);
@@ -58,12 +57,10 @@ class ServerConnection {
     }
 
     _endpoint() {
-        // If WEBSOCKET_URL is defined (e.g., Cloudflare Worker), use it
         if (window.WEBSOCKET_URL) {
             const suffix = window.isRtcSupported ? '/webrtc' : '/fallback';
             return window.WEBSOCKET_URL + suffix;
         }
-        // Fallback: same-origin WebSocket
         const protocol = location.protocol.startsWith('https') ? 'wss' : 'ws';
         const webrtc = window.isRtcSupported ? '/webrtc' : '/fallback';
         return protocol + '://' + location.host + '/server' + webrtc;
@@ -301,7 +298,8 @@ class RTCPeer extends Peer {
 
     _onChannelClosed() {
         console.log('RTC: channel closed', this._peerId);
-        if (!this.isCaller) return;
+        // FIX: use this._isCaller (was this.isCaller)
+        if (!this._isCaller) return;
         this._connect(this._peerId, true);
     }
 
@@ -523,7 +521,7 @@ RTCPeer.config = {
     'iceServers': [
         { urls: 'stun:stun.l.google.com:19302' },
         { urls: 'stun:stun1.l.google.com:19302' },
-        // Add a free TURN server (example – you can use your own or a public one)
+        // Free TURN servers (Metered.ca – reliable for testing)
         {
             urls: 'turn:openrelay.metered.ca:80',
             username: 'openrelayproject',
