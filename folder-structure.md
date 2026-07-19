@@ -36,3 +36,21 @@
 ├── 📄 wrangler.toml
 
 ```
+
+https://raw.githubusercontent.com/LAVU-OOE/redrop/refs/heads/main/
+https://raw.githubusercontent.com/LAVU-OOE/redrop/refs/heads/main/images/
+https://raw.githubusercontent.com/LAVU-OOE/redrop/refs/heads/main/images/twitter-stream.jpg
+https://raw.githubusercontent.com/LAVU-OOE/redrop/refs/heads/main/index.html
+https://raw.githubusercontent.com/LAVU-OOE/redrop/refs/heads/main/lang/de.json
+https://raw.githubusercontent.com/LAVU-OOE/redrop/refs/heads/main/lang/en.json
+https://raw.githubusercontent.com/LAVU-OOE/redrop/refs/heads/main/manifest.json
+https://raw.githubusercontent.com/LAVU-OOE/redrop/refs/heads/main/scripts/localization.js
+https://raw.githubusercontent.com/LAVU-OOE/redrop/refs/heads/main/scripts/network.js
+https://raw.githubusercontent.com/LAVU-OOE/redrop/refs/heads/main/scripts/persistent-storage.js
+https://raw.githubusercontent.com/LAVU-OOE/redrop/refs/heads/main/scripts/ui.js
+https://raw.githubusercontent.com/LAVU-OOE/redrop/refs/heads/main/service-worker.js
+https://raw.githubusercontent.com/LAVU-OOE/redrop/refs/heads/main/sounds/blop.ogg
+https://raw.githubusercontent.com/LAVU-OOE/redrop/refs/heads/main/sounds/blop.mp3
+https://raw.githubusercontent.com/LAVU-OOE/redrop/refs/heads/main/styles.css
+https://raw.githubusercontent.com/LAVU-OOE/redrop/refs/heads/main/worker.js
+https://raw.githubusercontent.com/LAVU-OOE/redrop/refs/heads/main/wrangler.toml
