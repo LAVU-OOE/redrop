@@ -1,0 +1,37 @@
+# OS related
+.DS_Store/
+.archived/
+Thumbs.db
+desktop.ini
+
+# IDEs
+.vscode/
+.idea/
+#.dev/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Node.js/Python
+node_modules/
+__pycache__/
+*.log
+.env
+
+# Local databases (Do not commit backups/live data.)
+*.db
+*.sqlite
+
+# Cloudflare Wrangler local development cache
+.wrangler/
+.dev.vars
+
+# Node dependencies
+node_modules/
+npm-debug.log*
+
+*.folder-structure.md
+*.raw.usercontent.md
+*.worker.js
+*.wrangler.toml
