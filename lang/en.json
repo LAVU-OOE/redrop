@@ -1,58 +1,53 @@
 {
-  "about": "Re:Drop",
-  "about_title": "Re:Drop",
-  "about_subtitle": "The easiest way to transfer files across devices.",
-  "about_github": "Re:Drop on Github",
-  "about_github_title": "Re:Drop on Github",
-  "about_donate": "Contribute to keep Re:Drop free",
-  "about_donate_title": "Contribute to keep Re:Drop free",
-  "about_tweet": "Tweet about Re:Drop",
-  "about_tweet_title": "Tweet about Re:Drop",
-  "about_faq": "Frequently asked questions",
-  "about_faq_title": "Frequently asked questions",
-
-  "header_about": "About Re:Drop",
-  "header_about_title": "About Re:Drop",
-  "header_notifications": "Enable Notifications",
-  "header_notifications_title": "Enable Notifications",
-  "header_install": "Install Re:Drop",
-  "header_install_title": "Install Re:Drop",
-
-  "footer_description": "The easiest way to transfer data across devices.",
-  "footer_discovery": "Allow me to be discovered by: Everyone in this network.",
-
-  "no_peers": "Open Re:Drop on other devices to send files.",
-
-  "instructions_desktop": "Click to send files or right click to send a message.",
-  "instructions_mobile": "Tap to send files or long tap to send a message.",
-
-  "receive_title": "File Received",
-  "receive_title_title": "File Received",
-  "receive_filename": "Filename",
-  "receive_filename_text": "Filename",
-  "receive_filesize": "File Size",
-  "receive_filesize_text": "File Size",
-  "receive_download": "Download",
-  "receive_download_text": "Download",
-  "receive_ignore": "Ignore",
-  "receive_ignore_text": "Ignore",
-
-  "sendtext_title": "Send a Message",
-  "sendtext_title_title": "Send a Message",
-  "sendtext_placeholder": "Send a message",
-  "sendtext_placeholder_placeholder": "Send a message",
-  "sendtext_send": "Send",
-  "sendtext_send_text": "Send",
-  "sendtext_cancel": "Cancel",
-  "sendtext_cancel_text": "Cancel",
-
-  "receivetext_title": "Message Received",
-  "receivetext_title_title": "Message Received",
-  "receivetext_copy": "Copy",
-  "receivetext_copy_text": "Copy",
-  "receivetext_close": "Close",
-  "receivetext_close_text": "Close",
-
-  "toast_completed": "File Transfer Completed",
-  "toast_completed_text": "File Transfer Completed"
+    "header": {
+        "about": "About Re:Drop",
+        "about_title": "About Re:Drop",
+        "notifications": "Enable Notifications",
+        "notifications_title": "Enable Notifications",
+        "install": "Install Re:Drop",
+        "install_title": "Install Re:Drop"
+    },
+    "no_peers": "Open Re:Drop on other devices to send files.",
+    "instructions": {
+        "desktop": "Click to send files or right click to send a message.",
+        "mobile": "Tap to send files or long tap to send a message."
+    },
+    "footer": {
+        "description": "The easiest way to transfer data across devices.",
+        "discovery": "Allow me to be discovered by: Everyone in this network."
+    },
+    "receive": {
+        "title": "File Received",
+        "filename": "Filename",
+        "filesize": "File Size",
+        "download": "Download",
+        "ignore": "Ignore"
+    },
+    "sendtext": {
+        "title": "Send a Message",
+        "placeholder": "Send a message",
+        "placeholder_placeholder": "Send a message",
+        "send": "Send",
+        "cancel": "Cancel"
+    },
+    "receivetext": {
+        "title": "Message Received",
+        "copy": "Copy",
+        "close": "Close"
+    },
+    "toast": {
+        "completed": "File Transfer Completed"
+    },
+    "about": {
+        "title": "Re:Drop",
+        "subtitle": "The easiest way to transfer files across devices.",
+        "github": "Re:Drop on Github",
+        "github_title": "Re:Drop on Github",
+        "donate": "Contribute to keep Re:Drop free",
+        "donate_title": "Contribute to keep Re:Drop free",
+        "tweet": "Tweet about Re:Drop",
+        "tweet_title": "Tweet about Re:Drop",
+        "faq": "Frequently asked questions",
+        "faq_title": "Frequently asked questions"
+    }
 }

@@ -136,12 +136,16 @@ class Localization {
     static async translateElement(element) {
         const key = element.getAttribute("data-i18n-key");
         let attrs = element.getAttribute("data-i18n-attrs");
-        if (!attrs) attrs = "text";
+        if (!attrs) attrs = "text"; // default fallback
         const attrsArray = attrs.split(" ");
 
         attrsArray.forEach(attr => {
-            // Always use the same key – no suffix
-            const translation = Localization.getTranslation(key);
+            let translationKey = key;
+            // Append attribute suffix unless it's "text"
+            if (attr !== "text") {
+                translationKey = key + "_" + attr;
+            }
+            const translation = Localization.getTranslation(translationKey);
             if (attr === "text") {
                 element.innerText = translation;
             } else {
@@ -179,7 +183,7 @@ class Localization {
         return translation;
     }
 
-    static getTranslation(key, attr = null, data = {}, useDefault = false) {
+    static getTranslation(key, data = {}, useDefault = false) {
         let translationObj = useDefault
             ? Localization.translationsDefaultLocale
             : Localization.translations;
@@ -191,33 +195,33 @@ class Localization {
             translation = Localization.addDataToTranslation(translation, data);
         } catch (e) {
             console.warn(e);
-            Localization.logTranslationMissingOrBroken(key, attr, data, useDefault);
-            Localization.logHelpCallKey(key, attr);
+            Localization.logTranslationMissingOrBroken(key, data, useDefault);
+            Localization.logHelpCallKey(key);
             Localization.logHelpCall();
 
             if (useDefault || Localization.currentLocaleIsDefault()) {
                 translation = "";
             } else {
                 console.log(`Using default language ${Localization.defaultLocale.toUpperCase()} instead.`);
-                translation = Localization.getTranslation(key, attr, data, true);
+                translation = Localization.getTranslation(key, data, true);
             }
         }
 
         return Localization.escapeHTML(translation);
     }
 
-    static logTranslationMissingOrBroken(key, attr, data, useDefault) {
+    static logTranslationMissingOrBroken(key, data, useDefault) {
         let usedLocale = useDefault
             ? Localization.defaultLocale.toUpperCase()
             : (Localization.locale ? Localization.locale.toUpperCase() : 'UNKNOWN');
-        console.warn(`Missing or broken translation for language ${usedLocale}.\n`, 'key:', key, 'attr:', attr, 'data:', data);
+        console.warn(`Missing or broken translation for language ${usedLocale}.\n`, 'key:', key, 'data:', data);
     }
 
     static logHelpCall() {
         console.log("Help translating redrop: https://hosted.weblate.org/engage/redrop/");
     }
 
-    static logHelpCallKey(key, attr) {
+    static logHelpCallKey(key) {
         let locale = Localization.locale ? Localization.locale.toLowerCase() : 'en';
         console.warn(`Translate this string here: https://hosted.weblate.org/browse/redrop/redrop-spa/${locale}/?q=${key}`);
     }

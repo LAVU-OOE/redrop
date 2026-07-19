@@ -1,58 +1,53 @@
 {
-  "about": "Re:Drop",
-  "about_title": "Re:Drop",
-  "about_subtitle": "Der einfachste Weg, Dateien zwischen Geräten zu teilen.",
-  "about_github": "Re:Drop auf Github",
-  "about_github_title": "Re:Drop auf Github",
-  "about_donate": "Unterstütze Re:Drop",
-  "about_donate_title": "Unterstütze Re:Drop",
-  "about_tweet": "Tweete über Re:Drop",
-  "about_tweet_title": "Tweete über Re:Drop",
-  "about_faq": "Häufig gestellte Fragen",
-  "about_faq_title": "Häufig gestellte Fragen",
-
-  "header_about": "Über Re:Drop",
-  "header_about_title": "Über Re:Drop",
-  "header_notifications": "Benachrichtigungen aktivieren",
-  "header_notifications_title": "Benachrichtigungen aktivieren",
-  "header_install": "Re:Drop installieren",
-  "header_install_title": "Re:Drop installieren",
-
-  "footer_description": "Der einfachste Weg, Daten zwischen Geräten zu übertragen.",
-  "footer_discovery": "Erlaube mir, entdeckt zu werden von: Allen in diesem Netzwerk.",
-
-  "no_peers": "Öffne Re:Drop auf anderen Geräten, um Dateien zu senden.",
-
-  "instructions_desktop": "Klicke, um Dateien zu senden oder verwende Rechtsklick für eine Nachricht.",
-  "instructions_mobile": "Tippe, um Dateien zu senden oder langes Tippen für eine Nachricht.",
-
-  "receive_title": "Datei erhalten",
-  "receive_title_title": "Datei erhalten",
-  "receive_filename": "Dateiname",
-  "receive_filename_text": "Dateiname",
-  "receive_filesize": "Dateigröße",
-  "receive_filesize_text": "Dateigröße",
-  "receive_download": "Herunterladen",
-  "receive_download_text": "Herunterladen",
-  "receive_ignore": "Ignorieren",
-  "receive_ignore_text": "Ignorieren",
-
-  "sendtext_title": "Nachricht senden",
-  "sendtext_title_title": "Nachricht senden",
-  "sendtext_placeholder": "Nachricht senden",
-  "sendtext_placeholder_placeholder": "Nachricht senden",
-  "sendtext_send": "Senden",
-  "sendtext_send_text": "Senden",
-  "sendtext_cancel": "Abbrechen",
-  "sendtext_cancel_text": "Abbrechen",
-
-  "receivetext_title": "Nachricht erhalten",
-  "receivetext_title_title": "Nachricht erhalten",
-  "receivetext_copy": "Kopieren",
-  "receivetext_copy_text": "Kopieren",
-  "receivetext_close": "Schließen",
-  "receivetext_close_text": "Schließen",
-
-  "toast_completed": "Dateiübertragung abgeschlossen",
-  "toast_completed_text": "Dateiübertragung abgeschlossen"
+    "header": {
+        "about": "Über Re:Drop",
+        "about_title": "Über Re:Drop",
+        "notifications": "Benachrichtigungen aktivieren",
+        "notifications_title": "Benachrichtigungen aktivieren",
+        "install": "Re:Drop installieren",
+        "install_title": "Re:Drop installieren"
+    },
+    "no_peers": "Öffne Re:Drop auf anderen Geräten, um Dateien zu senden.",
+    "instructions": {
+        "desktop": "Klicken, um Dateien zu senden, oder Rechtsklick für eine Nachricht.",
+        "mobile": "Tippen, um Dateien zu senden, oder lange tippen für eine Nachricht."
+    },
+    "footer": {
+        "description": "Der einfachste Weg, Daten zwischen Geräten auszutauschen.",
+        "discovery": "Erlaube mir, von folgenden gefunden zu werden: Allen in diesem Netzwerk."
+    },
+    "receive": {
+        "title": "Datei empfangen",
+        "filename": "Dateiname",
+        "filesize": "Dateigröße",
+        "download": "Herunterladen",
+        "ignore": "Ignorieren"
+    },
+    "sendtext": {
+        "title": "Nachricht senden",
+        "placeholder": "Nachricht eingeben",
+        "placeholder_placeholder": "Nachricht eingeben",
+        "send": "Senden",
+        "cancel": "Abbrechen"
+    },
+    "receivetext": {
+        "title": "Nachricht empfangen",
+        "copy": "Kopieren",
+        "close": "Schließen"
+    },
+    "toast": {
+        "completed": "Dateiübertragung abgeschlossen"
+    },
+    "about": {
+        "title": "Re:Drop",
+        "subtitle": "Der einfachste Weg, Dateien zwischen Geräten auszutauschen.",
+        "github": "Re:Drop auf Github",
+        "github_title": "Re:Drop auf Github",
+        "donate": "Unterstütze Re:Drop und halte es kostenlos",
+        "donate_title": "Unterstütze Re:Drop und halte es kostenlos",
+        "tweet": "Über Re:Drop twittern",
+        "tweet_title": "Über Re:Drop twittern",
+        "faq": "Häufig gestellte Fragen",
+        "faq_title": "Häufig gestellte Fragen"
+    }
 }
