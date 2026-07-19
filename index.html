@@ -39,13 +39,11 @@
 
     <!-- ===== HEADER ===== -->
     <header class="row-reverse">
-        <!-- Language Selector -->
-        <a href="#" id="languageSelector" class="icon-button" title="Language">
+        <!-- Language Toggle -->
+        <a href="#" id="languageSelector" class="icon-button" title="Switch language">
             <svg class="icon"><use xlink:href="#icon-language-selector" /></svg>
+            <span id="langLabel" class="lang-label">EN</span>
         </a>
-        <div id="languageDropdown" class="dropdown" style="display:none;">
-            <!-- Will be populated dynamically by JavaScript -->
-        </div>
 
         <a href="#about" class="icon-button" data-i18n-key="header.about" data-i18n-attrs="title" title="About Re:Drop">
             <svg class="icon"><use xlink:href="#info-outline" /></svg>
@@ -126,11 +124,26 @@
     <!-- ===== ABOUT PAGE ===== -->
     <x-about id="about" class="full center column">
         <section class="center column fade-in">
-            <header class="row-reverse">
-                <a href="#" class="close icon-button">
-                    <svg class="icon"><use xlink:href="#close-icon" /></svg>
-                </a>
-            </header>
+<!-- ===== HEADER ===== -->
+<header class="row-reverse">
+    <!-- Hidden install button (appears rightmost) -->
+    <a href="#" id="install" class="icon-button" data-i18n-key="header.install" data-i18n-attrs="title" title="Install Re:Drop" hidden>
+        <svg class="icon"><use xlink:href="#homescreen" /></svg>
+    </a>
+    <!-- Hidden notification button -->
+    <a href="#" id="notification" class="icon-button" data-i18n-key="header.notifications" data-i18n-attrs="title" title="Enable Notifications" hidden>
+        <svg class="icon"><use xlink:href="#notifications" /></svg>
+    </a>
+    <!-- About button (middle) -->
+    <a href="#about" class="icon-button" data-i18n-key="header.about" data-i18n-attrs="title" title="About Re:Drop">
+        <svg class="icon"><use xlink:href="#info-outline" /></svg>
+    </a>
+    <!-- Language toggle (leftmost) -->
+    <a href="#" id="languageSelector" class="icon-button" title="Switch language">
+        <svg class="icon"><use xlink:href="#icon-language-selector" /></svg>
+        <span id="langLabel" class="lang-label">EN</span>
+    </a>
+</header>
             <svg class="icon logo"><use xlink:href="#wifi-tethering" /></svg>
             <h1 data-i18n-key="about.title" data-i18n-attrs="text">Re:Drop</h1>
             <div class="font-subheading" data-i18n-key="about.subtitle" data-i18n-attrs="text">The easiest way to transfer files across devices.</div>
@@ -209,7 +222,7 @@
     <script src="scripts/ui.js"></script>
     <script src="scripts/localization.js"></script>
 
-    <!-- Initialization script with retry & fallback -->
+    <!-- Initialization script with language toggle -->
     <script>
         (function() {
             function init() {
@@ -223,52 +236,48 @@
                 // Check Localization – it auto‑inits when loaded
                 if (typeof Localization === 'undefined') {
                     console.warn('Re:Drop: localization.js not loaded – using fallback');
-                    // Continue without translation
                 } else {
                     try {
                         Localization.setInitialTranslation()
-                            .then(() => console.log('Re:Drop: localization ready'))
+                            .then(() => {
+                                console.log('Re:Drop: localization ready');
+                                // Update toggle label after translation loads
+                                updateLanguageLabel();
+                            })
                             .catch(err => console.warn('Re:Drop: localization error', err));
                     } catch (e) {
                         console.warn('Re:Drop: localization exception', e);
                     }
                 }
 
-                // Language dropdown – populate dynamically
-                var dropdown = document.getElementById('languageDropdown');
-                if (dropdown && typeof Localization !== 'undefined') {
-                    // Clear default links
-                    dropdown.innerHTML = '';
-                    // Use all supported locales
-                    Localization.supportedLocales.forEach(function(lang) {
-                        var link = document.createElement('a');
-                        link.href = '#';
-                        link.setAttribute('data-lang', lang);
-                        // Display name: maybe use a mapping or just the code
-                        // For simplicity, we'll show the code
-                        link.textContent = lang;
-                        link.addEventListener('click', function(e) {
-                            e.preventDefault();
-                            var lang = this.getAttribute('data-lang');
-                            localStorage.setItem('language_code', lang);
-                            if (typeof Localization !== 'undefined') {
-                                Localization.setTranslation(lang)
-                                    .then(function() { dropdown.style.display = 'none'; })
-                                    .catch(function() { location.reload(); });
-                            } else {
-                                location.reload();
-                            }
-                        });
-                        dropdown.appendChild(link);
-                    });
+                // -------- Language Toggle (EN/DE) --------
+                var selector = document.getElementById('languageSelector');
+                var langLabel = document.getElementById('langLabel');
+
+                function updateLanguageLabel() {
+                    if (!langLabel) return;
+                    var current = localStorage.getItem('language_code') || 'en';
+                    langLabel.textContent = current.toUpperCase();
                 }
 
-                // Language dropdown toggle
-                var selector = document.getElementById('languageSelector');
-                if (selector && dropdown) {
+                if (selector && langLabel) {
                     selector.addEventListener('click', function(e) {
                         e.preventDefault();
-                        dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+                        // Toggle between 'en' and 'de'
+                        var current = localStorage.getItem('language_code') || 'en';
+                        var next = current === 'en' ? 'de' : 'en';
+                        localStorage.setItem('language_code', next);
+                        if (typeof Localization !== 'undefined') {
+                            Localization.setTranslation(next)
+                                .then(function() {
+                                    updateLanguageLabel();
+                                })
+                                .catch(function() {
+                                    location.reload();
+                                });
+                        } else {
+                            location.reload();
+                        }
                     });
                 }
 
@@ -284,31 +293,25 @@
     </script>
 
     <style>
-        /* Dropdown styling – placed inline to ensure it's applied */
-        #languageDropdown {
+        /* Language label inside the icon button */
+        #languageSelector {
+            position: relative;
+        }
+        .lang-label {
             position: absolute;
-            top: 56px;
-            right: 16px;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            border-radius: 4px;
-            padding: 8px 0;
-            z-index: 100;
-            min-width: 120px;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-        #languageDropdown a {
-            display: block;
-            padding: 8px 20px;
-            color: #333;
-            text-decoration: none;
-        }
-        #languageDropdown a:hover {
-            background: #f0f0f0;
+            bottom: 2px;
+            right: 2px;
+            font-size: 8px;
+            font-weight: bold;
+            background: rgba(0,0,0,0.6);
+            color: white;
+            padding: 1px 4px;
+            border-radius: 3px;
+            line-height: 1;
+            pointer-events: none;
         }
         header {
-            position: relative; /* needed for absolute dropdown */
+            position: relative;
         }
     </style>
 
